@@ -1,3 +1,3 @@
 # weather-telegram-bot
 
-Simple telegram bot for getting current weather information in SPb
+Simple Telegram Bot for get weather current in Saint-Petersburg

@@ -1,5 +1,5 @@
-"""Simple Bot to reply to Telegram messages."""
-
+"""Simple Bot for get weather current in Saint-Petersburg."""
+import json
 import logging
 import os
 
@@ -10,7 +10,10 @@ from telegram.ext import (
     Filters,
 )
 
+from weather_utils import get_raw_weather_data
+
 PORT = int(os.environ.get('PORT', 8443))
+
 
 # Enable logging
 logging.basicConfig(
@@ -25,7 +28,8 @@ TOKEN = os.environ["TOKEN"]
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Hi!')
+    weather = json.dumps(get_raw_weather_data())
+    update.message.reply_text(weather)
 
 
 def help(update, context):
@@ -44,23 +48,17 @@ def error(update, context):
 
 
 def main():
-    """Start the bot."""
-    # Create the Updater and pass it your bot's token.
-    # Make sure to set use_context=True to use the new context based callbacks
-    # Post version 12 this will no longer be necessary
     updater = Updater(TOKEN, use_context=True)
 
-    # Get the dispatcher to register handlers
+    # Dispatcher to register handlers
     dp = updater.dispatcher
 
-    # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
 
-    # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
 
-    # log all errors
+    # Log all errors
     dp.add_error_handler(error)
 
     # Start the Bot
@@ -71,10 +69,7 @@ def main():
         webhook_url='https://weather-spb-telegram-bot.herokuapp.com/' + TOKEN,
     )
 
-
-    # Run the bot until you press Ctrl-C or the process receives SIGINT,
-    # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
+    # Run the bot
     updater.idle()
 
 
