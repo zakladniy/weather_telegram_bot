@@ -3,7 +3,7 @@ import requests
 import os
 
 
-API_TOKEN = os.environ["API_TOKEN"]
+API_KEY = os.environ["API_KEY"]
 
 
 def get_raw_weather_data() -> dict:
@@ -14,7 +14,7 @@ def get_raw_weather_data() -> dict:
     lat = '59.9311'
     lon = '30.3609'
     api_url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}' \
-              f'&lon={lon}&appid={API_TOKEN}'
+              f'&lon={lon}&appid={API_KEY}'
     response = requests.get(url=api_url)
     if response.status_code == 200:
         raw_data = response.json()
