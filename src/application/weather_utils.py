@@ -1,11 +1,12 @@
 """Tools for get and processed current weather in Saint-Petersburg."""
-from datetime import datetime
+import os
+from datetime import datetime, timedelta
 
 import requests
-import os
-
 
 API_KEY = os.environ["API_KEY"]
+
+TIME_DELTA = timedelta(hours=3)
 
 
 def get_raw_weather_data() -> dict:
@@ -26,12 +27,12 @@ def get_raw_weather_data() -> dict:
 
 
 def timestamp_to_iso_date(timestamp: datetime.timestamp) -> str:
-    dt_object = datetime.fromtimestamp(timestamp)
+    dt_object = datetime.fromtimestamp(timestamp) + TIME_DELTA
     return dt_object.date().isoformat()
 
 
 def timestamp_to_hour(timestamp: datetime.timestamp) -> str:
-    dt_object = datetime.fromtimestamp(timestamp)
+    dt_object = datetime.fromtimestamp(timestamp) + TIME_DELTA
     date = str(datetime.strptime(str(dt_object), '%Y-%m-%d %H:%M:%S'))
     return date.split()[-1]
 
