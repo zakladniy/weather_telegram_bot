@@ -27,22 +27,41 @@ def get_raw_weather_data() -> dict:
 
 
 def timestamp_to_iso_date(timestamp: datetime.timestamp) -> str:
+    """Convert timestamp to date in ISO format.
+
+    @param timestamp: date in timestamp
+    @return: date in ISO format
+    """
     dt_object = datetime.fromtimestamp(timestamp) + TIME_DELTA
     return dt_object.date().isoformat()
 
 
 def timestamp_to_hour(timestamp: datetime.timestamp) -> str:
+    """Convert timestamp to hour, minutes, seconds.
+
+    @param timestamp: date in timestamp
+    @return: hour, minutes, seconds
+    """
     dt_object = datetime.fromtimestamp(timestamp) + TIME_DELTA
     date = str(datetime.strptime(str(dt_object), '%Y-%m-%d %H:%M:%S'))
     return date.split()[-1]
 
 
 def kelvin_to_celsius(kelvin_temp: float) -> int:
+    """Convert temperature from Kelvin to Celsius
+
+    @param kelvin_temp: Kelvin temperature
+    @return: Celsius temperature
+    """
     t0 = 273.15
     return round(kelvin_temp - t0)
 
 
 def create_weather_message() -> str:
+    """Create message with weather info from raw weather data.
+
+    @return: message with weather info
+    """
     raw_weather = get_raw_weather_data()
     if isinstance(raw_weather, dict):
         current_date = timestamp_to_iso_date(raw_weather['dt'])
@@ -58,19 +77,19 @@ def create_weather_message() -> str:
         wind_deg = raw_weather['wind']['deg']
         sunrise_hour = timestamp_to_hour(raw_weather['sys']['sunrise'])
         sunset_hour = timestamp_to_hour(raw_weather['sys']['sunset'])
-        message = f"Current date: {current_date}, " \
-                  f"weather type: {weather_type}, " \
-                  f"weather description: {weather_description}, " \
-                  f"current temperature: {current_temp} C, " \
-                  f"temperature feels like: {temp_feels_like}  C, " \
-                  f"minimum temperature: {temp_min} C, " \
-                  f"maximum temperature: {temp_max} C, " \
-                  f"pressure: {pressure} hPa, " \
-                  f"humidity: {humidity} %, " \
-                  f"wind speed: {wind_speed} meter/sec, " \
-                  f"wind direction: {wind_deg} degrees, " \
-                  f"sunrise hour: {sunrise_hour}, " \
-                  f"sunset hour: {sunset_hour}"
+        message = f"Current date: {current_date} \n" \
+                  f"Weather type: {weather_type} \n" \
+                  f"Weather description: {weather_description} \n" \
+                  f"Current temperature: {current_temp} \u00B0C \n" \
+                  f"Temperature feels like: {temp_feels_like} \u00B0C \n" \
+                  f"Minimum temperature: {temp_min} \u00B0C \n" \
+                  f"Maximum temperature: {temp_max} \u00B0C \n" \
+                  f"Pressure: {pressure} hPa \n" \
+                  f"Humidity: {humidity} % \n" \
+                  f"Wind speed: {wind_speed} meter/sec \n" \
+                  f"Wind direction: {wind_deg} degrees \n" \
+                  f"Sunrise hour: {sunrise_hour} \n" \
+                  f"Sunset hour: {sunset_hour}"
         return message
     else:
         return 'Ohh, error...'
