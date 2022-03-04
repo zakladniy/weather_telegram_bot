@@ -1,5 +1,4 @@
 """Simple Bot for get weather current in Saint-Petersburg."""
-import json
 import logging
 import os
 
@@ -10,7 +9,7 @@ from telegram.ext import (
     Filters,
 )
 
-from weather_utils import get_raw_weather_data
+from weather_utils import create_weather_message
 
 PORT = int(os.environ.get('PORT', 8443))
 
@@ -28,7 +27,7 @@ TOKEN = os.environ["TOKEN"]
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    weather = json.dumps(get_raw_weather_data())
+    weather = create_weather_message()
     update.message.reply_text(weather)
 
 
