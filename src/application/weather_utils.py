@@ -48,7 +48,7 @@ def timestamp_to_hour(timestamp: datetime.timestamp) -> str:
 
 
 def kelvin_to_celsius(kelvin_temp: float) -> int:
-    """Convert temperature from Kelvin to Celsius
+    """Convert temperature from Kelvin to Celsius.
 
     @param kelvin_temp: Kelvin temperature
     @return: Celsius temperature

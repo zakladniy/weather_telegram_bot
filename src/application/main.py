@@ -2,13 +2,7 @@
 import logging
 import os
 
-from telegram.ext import (
-    Updater,
-    CommandHandler,
-    MessageHandler,
-    Filters,
-)
-
+from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 from weather_utils import create_weather_message
 
 PORT = int(os.environ.get('PORT', 8443))
@@ -44,6 +38,7 @@ def error(update, context) -> None:
 
 
 def main() -> None:
+    """Main logic of Telegram bot."""
     updater = Updater(TOKEN, use_context=True)
 
     # Dispatcher to register handlers
