@@ -8,12 +8,13 @@ from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
 
 from weather_utils import create_weather_message
 
-PORT = int(os.environ.get('PORT', 8443))
+PORT = int(os.environ.get("PORT", 8443))
 
 # Enable logging
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO)
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
+)
 
 logger = logging.getLogger(__name__)
 TOKEN = os.environ["TOKEN"]
@@ -35,7 +36,7 @@ def help_command(update: Update, context: CallbackContext) -> None:
     @param update: incoming update
     @param context: context object
     """
-    update.message.reply_text('Help!')
+    update.message.reply_text("Help!")
 
 
 def echo(update: Update, context: CallbackContext) -> None:
@@ -76,12 +77,12 @@ def main() -> None:
         listen="0.0.0.0",
         port=int(PORT),
         url_path=TOKEN,
-        webhook_url=f'https://weather-spb-telegram-bot.herokuapp.com/{TOKEN}',
+        webhook_url=f"https://weather-spb-telegram-bot.herokuapp.com/{TOKEN}",
     )
 
     # Run the bot
     updater.idle()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
