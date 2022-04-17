@@ -15,8 +15,9 @@ def test_get_raw_weather_data() -> None:
     assert isinstance(raw_data, dict)
 
 
-@pytest.mark.parametrize("test_input,expected", [(1647027129, '01:32:09'),
-                                                 (1657027129, '19:18:49')])
+@pytest.mark.parametrize(
+    "test_input,expected", [(1647027129, "01:32:09"), (1657027129, "19:18:49")]
+)
 def test_timestamp_to_hour(test_input: int, expected: str) -> None:
     """Test converting timestamp to hour string.
 
@@ -26,8 +27,12 @@ def test_timestamp_to_hour(test_input: int, expected: str) -> None:
     assert timestamp_to_hour(test_input) == expected
 
 
-@pytest.mark.parametrize("test_input,expected", [(1647027129, '2022-03-12'),
-                                                 (1657027129, '2022-07-05')])
+@pytest.mark.parametrize(
+    "test_input,expected", [
+        (1647027129, "2022-03-12"),
+        (1657027129, "2022-07-05")
+    ]
+)
 def test_timestamp_to_iso_date(test_input: int, expected: str) -> None:
     """Test converting timestamp to date in ISO format.
 
@@ -49,16 +54,16 @@ def test_kelvin_to_celsius(test_input, expected) -> None:
 
 def test_create_weather_message() -> None:
     """Test correct string with current message weather"""
-    assert 'Current date' in create_weather_message()
-    assert 'Weather type' in create_weather_message()
-    assert 'Weather description' in create_weather_message()
-    assert 'Current temperature' in create_weather_message()
-    assert 'Temperature feels like' in create_weather_message()
-    assert 'Minimum temperature' in create_weather_message()
-    assert 'Maximum temperature' in create_weather_message()
-    assert 'Pressure' in create_weather_message()
-    assert 'Humidity' in create_weather_message()
-    assert 'Wind speed' in create_weather_message()
-    assert 'Wind direction' in create_weather_message()
-    assert 'Sunrise hour' in create_weather_message()
-    assert 'Sunset hour' in create_weather_message()
+    assert "Current date" in create_weather_message()
+    assert "Weather type" in create_weather_message()
+    assert "Weather description" in create_weather_message()
+    assert "Current temperature" in create_weather_message()
+    assert "Temperature feels like" in create_weather_message()
+    assert "Minimum temperature" in create_weather_message()
+    assert "Maximum temperature" in create_weather_message()
+    assert "Pressure" in create_weather_message()
+    assert "Humidity" in create_weather_message()
+    assert "Wind speed" in create_weather_message()
+    assert "Wind direction" in create_weather_message()
+    assert "Sunrise hour" in create_weather_message()
+    assert "Sunset hour" in create_weather_message()
