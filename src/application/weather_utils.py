@@ -1,4 +1,5 @@
-"""Tools for get and processed current weather in Saint-Petersburg."""
+"""Tools for get and processed current weather in Saint-Petersburg
+from external API."""
 import os
 from datetime import datetime, timedelta
 
