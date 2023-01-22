@@ -76,7 +76,7 @@ def main() -> None:
         listen="0.0.0.0",
         port=int(PORT),
         url_path=TOKEN,
-        webhook_url=f"https://weather-spb-telegram-bot.herokuapp.com/{TOKEN}",
+        webhook_url=f"https://worker-production-ef0a.up.railway.app/{TOKEN}",
     )
 
     # Run the bot
