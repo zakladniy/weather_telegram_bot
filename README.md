@@ -4,7 +4,7 @@
 ### Main info
 
 Simple Telegram Bot for get current weather in Saint-Petersburg
-deployed with Railway
+deployed with Railway service
 
 Weather info based on free price plan from [Weather API](https://openweathermap.org/api) 
 
